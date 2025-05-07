@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NutritionalPlan\CreateNutritionalPlanRequest;
 use App\Services\NutritionalPlanService;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class NutritionalPlanController extends Controller
         return response()->json($this->service->getAll());
     }
 
-    public function store(Request $request)
+    public function store(CreateNutritionalPlanRequest $request)
     {
         $plan = $this->service->create($request->validated());
         return response()->json($plan, 201);

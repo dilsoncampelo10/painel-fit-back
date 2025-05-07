@@ -11,7 +11,7 @@ class Meal extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['nutritional_plan_id', 'name'];
+    protected $fillable = ['nutritional_plan_id', 'title'];
 
     public function items(): HasMany
     {

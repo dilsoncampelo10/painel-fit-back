@@ -10,8 +10,8 @@ class MealItem extends Model
 {
 
     use SoftDeletes;
-    
-    protected $fillable = ['meal_id', 'name', 'description'];
+
+    protected $fillable = ['meal_id', 'title', 'description'];
 
     public function meal(): BelongsTo
     {

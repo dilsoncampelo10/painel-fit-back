@@ -9,7 +9,7 @@ class NutritionalPlan extends Model
 {
     use SoftDeletes;
     
-    protected $fillable = ['user_id', 'date'];
+    protected $fillable = ['user_id'];
 
     public function meals()
     {

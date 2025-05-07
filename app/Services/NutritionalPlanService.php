@@ -11,12 +11,12 @@ class NutritionalPlanService
     {
         $plan = NutritionalPlan::create([
             'user_id' => Auth::user()->id,
-            'date' => $data['date'],
         ]);
 
         foreach ($data['meals'] as $mealData) {
+       
             $meal = $plan->meals()->create([
-                'name' => $mealData['name'],
+                'title' => $mealData['title'],
             ]);
 
             foreach ($mealData['items'] as $itemData) {
