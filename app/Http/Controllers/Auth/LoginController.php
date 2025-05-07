@@ -24,4 +24,10 @@ class LoginController extends Controller
             'token' => $token
         ], 201);
     }
+    public function destroy(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Logout successful.'], 200);
+    }
 }
