@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
     Route::apiResource('trainings', TrainingController::class);
+    Route::apiResource('nutritional-plans', TrainingController::class);
 });
 
 Route::post('/login', [LoginController::class, 'store'])->name('signin');
