@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NutritionalPlan\CreateNutritionalPlanRequest;
+use App\Http\Requests\NutritionalPlan\UpdateNutritionalPlanRequest;
 use App\Services\NutritionalPlanService;
 use Illuminate\Http\Request;
 
@@ -26,6 +27,13 @@ class NutritionalPlanController extends Controller
         $plan = $this->service->findById($id);
         return response()->json($plan);
     }
+
+    public function update(UpdateNutritionalPlanRequest $request, int $id)
+    {
+        $plan = $this->service->update($request->validated(), $id);
+        return response()->json($plan);
+    }
+
 
     public function destroy($id)
     {
