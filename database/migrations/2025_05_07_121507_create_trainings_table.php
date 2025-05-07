@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('muscle_group');
             $table->string('exercise');
-            $table->text('observation');
+            $table->text('observation')->nullable();
             $table->integer('goal_days');
-            $table->integer('completed_days');
+            $table->integer('completed_days')->default(0);
             $table->boolean('completed')->default(false);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
