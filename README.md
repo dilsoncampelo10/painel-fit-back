@@ -40,6 +40,6 @@ Uma API RESTful para usuários conseguirem acompanhar sua rotina de treinos, pro
 
 
 ### A fazer:
-- [] Testes de unidade
-- [] Documentação com Swagger
-- [] Criação de Pipeline
+- [ ] Testes de unidade
+- [ ] Documentação com Swagger
+- [ ] Criação de Pipeline
