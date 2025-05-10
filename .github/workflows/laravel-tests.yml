@@ -1,0 +1,59 @@
+name: Run Laravel Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: laravel
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, bcmath, pdo, pdo_mysql
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-progress --no-interaction
+
+      - name: Copy .env
+        run: cp .env.example .env
+
+      - name: Install Sail and dependencies
+        run: |
+          php artisan sail:install --no-interaction
+          ./vendor/bin/sail up -d
+          ./vendor/bin/sail composer install
+        env:
+          COMPOSER_ALLOW_SUPERUSER: 1
+
+      - name: Generate app key
+        run: ./vendor/bin/sail artisan key:generate
+
+      - name: Run migrations
+        run: ./vendor/bin/sail migrate --force
+
+      - name: Run tests
+        run: ./vendor/bin/sail artisan test
