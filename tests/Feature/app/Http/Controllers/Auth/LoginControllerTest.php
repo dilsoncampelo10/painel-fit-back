@@ -24,8 +24,8 @@ class LoginControllerTest extends TestCase
             'password' => Hash::make('senha-do-dilson'),
         ]);
 
-        $this->loginRoute = TestCase::api('login');
-        $this->logoutRoute = TestCase::api('logout');
+        $this->loginRoute = self::api('login');
+        $this->logoutRoute = self::api('logout');
     }
 
 
