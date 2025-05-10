@@ -38,7 +38,7 @@ jobs:
         run: ./vendor/bin/sail artisan key:generate
 
       - name: Run migrations
-        run: ./vendor/bin/sail migrate --force
+        run: ./vendor/bin/sail artisan migrate --force
 
       - name: Run tests
         run: ./vendor/bin/sail artisan test
