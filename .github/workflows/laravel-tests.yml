@@ -36,7 +36,18 @@ jobs:
 
       - name: Generate app key
         run: ./vendor/bin/sail artisan key:generate
-
+        
+      - name: Set Laravel database config
+        run: |
+          php artisan config:clear
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
+          DB_DATABASE: laravel
+          DB_USERNAME: sail
+          DB_PASSWORD: password
+          
       - name: Run migrations
         run: ./vendor/bin/sail artisan migrate --force
 
