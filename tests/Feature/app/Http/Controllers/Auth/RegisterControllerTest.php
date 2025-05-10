@@ -134,7 +134,7 @@ class RegisterControllerTest extends TestCase
         $this->assertTrue(Hash::check($password, $user->password));
     }
 
-    public function test_user_registration_fails_when_name_is_less_than_four_characters()
+    public function test_user_registration_fails_when_name_is_less_than_five_characters()
     {
         $response = $this->postJson($this->registerRoute, [
             'name' => 'Dil',
@@ -179,6 +179,22 @@ class RegisterControllerTest extends TestCase
             ->assertJsonValidationErrors(['email'])
             ->assertJsonFragment([
                 'message' => 'The email field must be a valid email address.'
+            ]);
+    }
+
+    public function test_user_registration_fails_when_password_is_less_than_eight_characters()
+    {
+        $response = $this->postJson($this->registerRoute, [
+            'name' => 'Dilson',
+            'email' => 'dilson@gmail.com',
+            'password' => '123456',
+            'password_confirmation' => '123456'
+        ]);
+
+        $response->assertStatus(422)
+            ->assertJsonValidationErrors(['password'])
+            ->assertJsonFragment([
+                'message' => 'The password field must be at least 8 characters.'
             ]);
     }
 }
